@@ -1,3 +1,5 @@
+# Deploy notebook project to Snowflake with database/schema context setup
+# Co-authored with CoCo
 #------------------------------------------------------------------------------
 # Hands-On Lab: Intro to Data Engineering with Notebooks
 # Script:       deploy_notebooks.py
@@ -16,6 +18,10 @@ def main(session: Session, database_name: str, schema_name: str, notebook_projec
     2. Uploads all files from the local folder to the stage
     3. Creates or updates the notebook project from the staged files
     """
+    # Step 0: Set database and schema context for the session
+    session.sql(f"USE DATABASE {database_name}").collect()
+    session.sql(f"USE SCHEMA {schema_name}").collect()
+
     # Step 1: Get a temporary stage from the session
     session_stage = session.get_session_stage()
     print(f"Using session stage: {session_stage}")
