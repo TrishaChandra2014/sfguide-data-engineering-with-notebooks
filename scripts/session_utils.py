@@ -99,7 +99,8 @@ def _create_session_from_env() -> Session:
         "schema": "SNOWFLAKE_SCHEMA",
         "role": "SNOWFLAKE_ROLE",
     }
-    
+    print("connection_params ---")
+    print(connection_params)
     for param_name, env_var in optional_params.items():
         value = os.environ.get(env_var)
         if value:
